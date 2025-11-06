@@ -1,0 +1,27 @@
+version: "3.9"
+
+services:
+  api:
+    build: .
+    command: uvicorn app.main:app --host 0.0.0.0 --port 8000
+    environment:
+      - ENVIRONMENT=docker
+    volumes:
+      - ./.env:/app/.env:ro
+      - data:/app/data
+    ports:
+      - "8000:8000"
+    depends_on:
+      - runner
+
+  runner:
+    build: .
+    command: python -m app.runner live --symbol AAPL --interval 60
+    environment:
+      - ENVIRONMENT=docker
+    volumes:
+      - ./.env:/app/.env:ro
+      - data:/app/data
+
+volumes:
+  data:

@@ -1,0 +1,56 @@
+[project]
+name = "numeriq-market-mind"
+version = "0.1.0"
+description = "Market-Mind Agent reference implementation built on the Google Agent Development Kit."
+authors = [{ name = "Numeriq Labs", email = "oss@numeriq.example" }]
+requires-python = ">=3.11"
+readme = "README.md"
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn[standard]>=0.24.0",
+    "pydantic>=2.7.0",
+    "pydantic-settings>=2.2.1",
+    "pandas>=2.2.0",
+    "numpy>=1.26.0",
+    "scipy>=1.11.0",
+    "httpx>=0.26.0",
+    "sqlalchemy>=2.0.0",
+    "python-dateutil>=2.8.2",
+    "typer>=0.12.0",
+    "structlog>=24.1.0",
+    "rich>=13.7.0",
+    "google-agent-sdk>=0.2.0; python_version >= '3.11'",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=8.1.0",
+    "pytest-asyncio>=0.23.0",
+    "httpx>=0.26.0",
+    "ruff>=0.3.0",
+    "black>=24.3.0",
+]
+
+[build-system]
+requires = ["setuptools", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.uv]
+package = true
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+select = ["E", "F", "I", "UP", "N", "B"]
+exclude = ["tests/__pycache__"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+pythonpath = ["src"]
